@@ -1,1 +1,11 @@
-
+Given Headers
+"""
+traceId:62977d46-7a50-41c9-8d84-38272ac2a8df
+applicationName:SUPERAPP
+channel:APP
+x-api-key:Csz7lJ8PiBGPZegNvzfMhMKAPlWIl7XvCOXVQJHoAuVyPQFw
+Content-Type:application/json
+provider:CI
+"""
+And method: PATCH
+And endpoint: https://api-test.cuidaco.pe/api-sp-backoffice-cuida/v1/payment/orders/${caseFhir}
