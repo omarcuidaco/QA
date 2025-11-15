@@ -9,3 +9,52 @@ provider:CI
 """
 And method: PATCH
 And endpoint: https://api-test.cuidaco.pe/api-sp-backoffice-cuida/v1/payment/orders/${caseFhir}
+And test data: caseNumberFhir existente en la tabla "caseOrder" con "caseId" con "statusId" diferente a '5c184b24-a4a9-4fba-bef5-ae8a8fccda57' (APPROVED)
+And business rule: si amount = 0 entonces coverage = 100% y si coverage = 100% entonces amount = 0
+And body data: 
+"""
+{
+  "Data": {
+    "PaymentOrder": {
+      "paymentRequest": "${uuid}",
+      "serviceRequest": "${uuid}",
+      "payment": {
+        "amount": 50.25,
+        "coverage": "50%",
+        "currency": "PEN"
+      }
+    }
+  }
+}
+"""
+When ${caseFhir} = <caseFhir>
+And sendRequest <testcase>
+Then body response contains:
+"""
+{"Error":{"code": <code>}}
+"""
+Examples:
+|testcase|caseFhir|code|
+|con caseFhir incorrecto|dato incorrecto aleatorio|404|
+|con paymentRequest incorrecto(diferente a uuid)|dato correcto|400|
+|con serviceRequest incorrecto(diferente a uuid)|dato correcto|400|
+|con amount incorrecto(number,1)|dato correcto|400|
+|con amount incorrecto(number,3)|dato correcto|400|
+|con amount incorrecto(string numerico,2)|dato correcto|400|
+|con amount incorrecto(-number,2)|dato correcto|400|
+|con amount 0 y coverage diferente al 100 % |dato correcto|400|
+|con coverage incorrecto("50")|dato correcto|400|
+|con coverage incorrecto("8d%")|dato correcto|400|
+|con coverage incorrecto negativo("-100%")|dato correcto|400|
+|con coverage incorrecto("101%")|dato correcto|400|
+|con coverage incorrecto("70.233%")|dato correcto|400|
+|con coverage 100% y amount diferente a 0|dato correcto|400|
+|con currency incorrecto("EUR")|dato correcto|400|
+
+
+
+
+
+
+
+
