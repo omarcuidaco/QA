@@ -35,7 +35,6 @@ Then body response contains:
 """
 Examples:
 | testcase                                        | caseFhir                  | code |
-|-------------------------------------------------|---------------------------|------|
 | con caseFhir incorrecto                         | dato incorrecto aleatorio | 404  |
 | con paymentRequest incorrecto(diferente a uuid) | dato correcto             | 400  |
 | con serviceRequest incorrecto(diferente a uuid) | dato correcto             | 400  |
