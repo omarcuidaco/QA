@@ -34,23 +34,23 @@ Then body response contains:
 {"Error":{"code": <code>}}
 """
 Examples:
-|testcase|caseFhir|code|
-|con caseFhir incorrecto|dato incorrecto aleatorio|404|
-|con paymentRequest incorrecto(diferente a uuid)|dato correcto|400|
-|con serviceRequest incorrecto(diferente a uuid)|dato correcto|400|
-|con amount incorrecto(number,1)|dato correcto|400|
-|con amount incorrecto(number,3)|dato correcto|400|
-|con amount incorrecto(string numerico,2)|dato correcto|400|
-|con amount incorrecto(-number,2)|dato correcto|400|
-|con amount 0 y coverage diferente al 100 % |dato correcto|400|
-|con coverage incorrecto("50")|dato correcto|400|
-|con coverage incorrecto("8d%")|dato correcto|400|
-|con coverage incorrecto negativo("-100%")|dato correcto|400|
-|con coverage incorrecto("101%")|dato correcto|400|
-|con coverage incorrecto("70.233%")|dato correcto|400|
-|con coverage 100% y amount diferente a 0|dato correcto|400|
-|con currency incorrecto("EUR")|dato correcto|400|
-
+| testcase                                        | caseFhir                  | code |
+|-------------------------------------------------|---------------------------|------|
+| con caseFhir incorrecto                         | dato incorrecto aleatorio | 404  |
+| con paymentRequest incorrecto(diferente a uuid) | dato correcto             | 400  |
+| con serviceRequest incorrecto(diferente a uuid) | dato correcto             | 400  |
+| con amount incorrecto(number,1)                 | dato correcto             | 400  |
+| con amount incorrecto(number,3)                 | dato correcto             | 400  |
+| con amount incorrecto(string numerico,2)        | dato correcto             | 400  |
+| con amount incorrecto(-number,2)                | dato correcto             | 400  |
+| con amount 0 y coverage diferente al 100 %      | dato correcto             | 400  |
+| con coverage incorrecto("50")                   | dato correcto             | 400  |
+| con coverage incorrecto("8d%")                  | dato correcto             | 400  |
+| con coverage incorrecto negativo("-100%")       | dato correcto             | 400  |
+| con coverage incorrecto("101%")                 | dato correcto             | 400  |
+| con coverage incorrecto("70.233%")              | dato correcto             | 400  |
+| con coverage 100% y amount diferente a 0        | dato correcto             | 400  |
+| con currency incorrecto("EUR")                  | dato correcto             | 400  |
 
 
 
