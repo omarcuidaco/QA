@@ -60,7 +60,6 @@ Examples:
 |con documentValue inexistente                                  |404 |
 |con documentValue y documentType existentes no correspondientes|404 |
 |con coveragePayment incorrecto (string)                        |400 |
-|con coveragePayment incorrecto (string)                        |400 |
 |con currency incorrecto (valor no permitido)                   |400 |
 |con statusId inexistente                                       |400 |
 |con effectiveBrand de límite superior (21 dígitos)             |400 |
