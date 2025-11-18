@@ -1,0 +1,78 @@
+Given Headers
+"""
+traceId:62977d46-7a50-41c9-8d84-38272ac2a8df
+applicationName:SUPERAPP
+channel:APP
+x-api-key:Csz7lJ8PiBGPZegNvzfMhMKAPlWIl7XvCOXVQJHoAuVyPQFw
+Content-Type:application/json
+provider:CUIDA
+"""
+And method: POST
+And endpoint: https://api-test.cuidaco.pe/api-sp-backoffice-cuida/v1/payment/orders/${case}/app
+And ${case} = "caseNumber" existente en la tabla "case" 
+And test data:
+"""
+-- "caseNumber" existente en la tabla "case"
+select "caseNumber" from "case";
+-- "documentType"+"documentValue" existentes en la tabla "patient"
+select "documentType","documentNumber" from "patient";
+-- "id" existente en la tabla "generalTable"
+select "id" from "generalTable";
+"""
+And body data:
+"""
+{
+  "Data": {
+    "patient": {
+      "documentType": "${string}",
+      "documentValue": "${documentValue}"
+    },
+    "payment": {
+      "coveragePayment": ${number},
+      "amount": ${number},
+      "currency": "PEN",
+      "paymentReferenceNumber": "${string}",
+      "statusId": "${statusId}",
+      "paymentDate": "${dateTime}",
+      "paymentMethod": "${string}",
+      "paymentLink": "${string}",
+      "paymentDocumentType": "${string}",
+      "paymentDocumentSeriesNumber": "${string}",
+      "paymentDocumentNumber": "${string}",
+      "effectiveBrand": "${string1T20}"
+    },
+    "provider": {
+      "taxNumber": "${string}",
+      "name": "${string}"
+    }
+  }
+}
+"""
+When send request <test case>:
+Then body response contains:
+"""
+{"Error":"code":<code>}
+"""
+Examples:
+|test case                                                      |code|
+|con ${case} inexistente                                        |404 |
+|con documentType inexistente                                   |404 |
+|con documentValue inexistente                                  |404 |
+|con documentValue y documentType existentes no correspondientes|404 |
+|con coveragePayment incorrecto (string)                        |400 |
+|con coveragePayment incorrecto (string)                        |400 |
+|con currency incorrecto (valor no permitido)                   |400 |
+|con statusId inexistente                                       |400 |
+|con effectiveBrand de límite superior (21 dígitos)             |400 |
+|sin dato requerido patient.documentType                        |400 |
+|sin dato requerido patient.documentValue                       |400 |
+|sin dato requerido payment.coveragePayment                     |400 |
+|sin dato requerido payment.amount                              |400 |
+|sin dato requerido payment.currency                            |400 |
+|sin dato requerido payment.paymentReferenceNumber              |400 |
+|sin dato requerido payment.statusId                            |400 |
+|sin dato requerido payment.paymentDate                         |400 |
+|sin dato requerido payment.paymentMethod                       |400 |
+|sin dato requerido payment.effectiveBrand                      |400 |
+|sin dato requerido provider.taxNumber                          |400 |
+|sin dato requerido provider.name                               |400 |
